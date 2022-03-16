@@ -9,9 +9,7 @@ export default {
     name: 'App'
 };
 </script>
-<style>
-@import '@/assets/base.css';
-
+<style lang="scss">
 #app {
 }
 </style>
