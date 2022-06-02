@@ -1,13 +1,18 @@
 <template>
-    <div class="comp-hello-world">Hello World</div>
+    <h1 class="ml-4" bg="blue-400 hover:blue-500 dark:blue-500 dark:hover:blue-600">13323</h1>
 </template>
-<script setup lang="ts"></script>
-<script>
-export default {
-    name: 'HelloWorld'
-};
+<script setup>
+import { ref } from "vue";
+
+defineProps({
+    msg: String,
+});
+
+const count = ref(0);
 </script>
-<style lang="scss">
-.comp-hello-world {
+
+<style lang="scss" scoped>
+h1 {
+    color: #f33;
 }
 </style>
