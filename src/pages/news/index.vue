@@ -3,7 +3,10 @@
     <hello-world></hello-world>
     <abd-d></abd-d>
     <i-carbon-accessibility />
+    {{ a }}
 </template>
-<script setup></script>
+<script setup>
+let a = $ref(0);
+</script>
 
 <style lang="scss" scoped></style>
