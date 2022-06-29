@@ -1,24 +1,24 @@
-import Vue from "vue";
-import axios from "axios";
-import _ from "lodash";
-import md5 from "blueimp-md5";
-import $Storage from "@/plugins/storage.js";
-import { Message } from "element-ui";
+import Vue from 'vue';
+import axios from 'axios';
+import _ from 'lodash';
+import md5 from 'blueimp-md5';
+import $Storage from '@/plugins/storage.js';
+import { Message } from 'element-ui';
 // =============================================
 // TODO: 将无效参数的过滤封装到这里，由用户进行控制
 // TODO: 此处封装统一弹框
 let request = axios.create({
-    method: "get",
+    method: 'get',
     baseURL: import.meta.env.VITE_HOST,
     timeout: 1000 * 60,
     withCredentials: false,
-    responseType: "json",
-    responseEncoding: "utf8",
+    responseType: 'json',
+    responseEncoding: 'utf8',
     // maxContentLength: 2000,
     headers: {
         // "Content-Type": "application/x-www-form-urlencoded",
-        "Content-Type": "application/json",
-    },
+        'Content-Type': 'application/json'
+    }
     // transformRequest: [
     //     function (data, headers) {
     //         console.log('headers=================');
@@ -41,7 +41,7 @@ request.interceptors.request.use(
              * 请求拦截，以下仅为示例，请根据项目需求调整。
              * 在发送请求之前做些什么
              */
-            if (config.method === "get") {
+            if (config.method === 'get') {
                 if (!config.params) {
                     config.params = {};
                 }
@@ -52,12 +52,12 @@ request.interceptors.request.use(
                     fieldsArray.push(`${key}=${value}`);
                 });
 
-                let fieldsSort = fieldsArray.sort().join("&");
+                let fieldsSort = fieldsArray.sort().join('&');
 
                 let fieldsMd5 = md5(fieldsSort);
                 config.params.sign = fieldsMd5;
             }
-            if (config.method === "post") {
+            if (config.method === 'post') {
                 if (!config.data) {
                     config.data = {};
                 }
@@ -68,20 +68,20 @@ request.interceptors.request.use(
                     fieldsArray.push(`${key}=${value}`);
                 });
 
-                let fieldsSort = fieldsArray.sort().join("&");
+                let fieldsSort = fieldsArray.sort().join('&');
 
                 let fieldsMd5 = md5(fieldsSort);
                 config.data.sign = fieldsMd5;
             }
 
-            let token = $Storage.session.get("token");
+            let token = $Storage.session.get('token');
             if (token) {
-                config.headers.authorization = "Bearer " + token;
+                config.headers.authorization = 'Bearer ' + token;
             }
 
             return config;
         } catch (err) {
-            console.log("interceptors.request");
+            console.log('interceptors.request');
             console.log(err);
         }
     },
@@ -99,17 +99,17 @@ request.interceptors.response.use(
         }
 
         // 无效的令牌
-        if (res.data.symbol === "NOT_LOGIN") {
-            location.href = "#/login";
+        if (res.data.symbol === 'NOT_LOGIN') {
+            location.href = '#/login';
         }
 
         return Promise.reject(res.data);
     },
     function (error) {
         Message({
-            type: "error",
+            type: 'error',
             duration: 5000,
-            message: error?.response?.data?.message,
+            message: error?.response?.data?.message
         });
     }
 );
