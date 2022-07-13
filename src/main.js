@@ -4,6 +4,9 @@ import store from '@/plugins/store.js';
 
 import App from './App.vue';
 
+console.log('import.meta.env');
+console.dir(import.meta.env);
+
 // 创建实例
 const app = createApp(App);
 
