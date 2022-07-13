@@ -9,7 +9,7 @@ import { Message } from 'element-ui';
 // TODO: 此处封装统一弹框
 let request = axios.create({
     method: 'get',
-    baseURL: import.meta.env.VITE_HOST,
+    // baseURL: import.meta.env.VITE_HOST,
     timeout: 1000 * 60,
     withCredentials: false,
     responseType: 'json',

@@ -1,6 +1,5 @@
 import { merge as _merge, cloneDeep as _cloneDeep } from 'lodash-es';
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { routeConfig } from '@/config/route.js';
 let routeFiles = import.meta.glob('@/pages/**/route.js', { eager: true });
 let pageFiles = import.meta.glob('@/pages/**/index.vue');
 let layoutFiles = import.meta.glob('@/layouts/**/index.vue');
@@ -10,7 +9,8 @@ let routes = [];
 // 以路由文件为基础遍历
 for (let key in routeFiles) {
     // 路由路径
-    let routePath = key.replace('/src/pages', '').replace('/route.js', '');
+    let routePath = key.replace(/.*\/pages/, '').replace('/route.js', '');
+    console.log('🚀 ~ file: router.js ~ line 14 ~ routePath', routePath);
     let mod = routeFiles[key];
     let routeData = mod.default || {};
 
@@ -52,7 +52,7 @@ for (let key in routeFiles) {
 
     routes.push(routeData);
 }
-
+console.log('🚀 ~ file: router.js ~ line 55 ~ routes', routes);
 // 创建路由
 const router = createRouter({
     history: createWebHashHistory(),
